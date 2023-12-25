@@ -1,7 +1,5 @@
 Python==3.11>>
 dash
-dash_core_components
-dash_html_components
 pandas
 matplotlib
 yfinace
