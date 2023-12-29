@@ -1,12 +1,10 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output
+from dash import dcc, html
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import matplotlib.pyplot as plt
 import yfinance as yf
 import datetime as dt
-
 
 # Initialize the Dash app
 app = dash.Dash(__name__)
@@ -24,13 +22,14 @@ def create_plot(stock_data):
     plt.xlabel('Date')
     plt.ylabel('Closing Price')
     plt.legend()
+    return plt
 
 # Layout of the app
 app.layout = html.Div([
     html.H1("Stock Price Visualization"),
     
-    html.Label("Enter Stock Ticker Symbol:"),
-    dcc.Input(id='stock-input', type='text', value=''),
+    html.Label("Enter Stock Code:"),
+    dcc.Input(id='stock-input', type='text', value='MSFT'),
 
     html.Label("Select Date Range:"),
     dcc.DatePickerRange(
@@ -40,6 +39,8 @@ app.layout = html.Div([
         display_format='YYYY-MM-DD'
     ),
 
+    html.Button('PLOT GRAPH', id='plot-button', n_clicks=0),
+
     dcc.Graph(id='stock-plot'),
 
 ])
@@ -47,19 +48,24 @@ app.layout = html.Div([
 # Callback to update the plot based on user input
 @app.callback(
     Output('stock-plot', 'figure'),
-    [Input('stock-input', 'value'),
-     Input('date-picker', 'start_date'),
-     Input('date-picker', 'end_date')]
+    [Input('plot-button', 'n_clicks')],
+    [State('stock-input', 'value'),
+     State('date-picker', 'start_date'),
+     State('date-picker', 'end_date')]
 )
-def update_plot(selected_stock, start_date, end_date):
-    stock_data = get_stock_data(selected_stock, start_date, end_date)
-    plot = create_plot(stock_data)
+def update_plot(n_clicks, selected_stock, start_date, end_date):
+    if n_clicks > 0:
+        stock_data = get_stock_data(selected_stock, start_date, end_date)
+        plt = create_plot(stock_data)
 
-    return {'data': [{'x': stock_data.index, 'y': stock_data['Close'], 'type': 'line', 'name': 'Closing Price'}],
-            'layout': {'title': f'{selected_stock} Stock Price Over Time',
-                       'xaxis': {'title': 'Date'},
-                       'yaxis': {'title': 'Closing Price'}}}
+        return {'data': [{'x': stock_data.index, 'y': stock_data['Close'], 'type': 'line', 'name': 'Closing Price'}],
+                'layout': {'title': f'{selected_stock} Stock Price Over Time',
+                           'xaxis': {'title': 'Date'},
+                           'yaxis': {'title': 'Closing Price'}}}
+    else:
+        # If the button has not been clicked, return an empty graph
+        return {'data': [], 'layout': {}}
 
-# Run the app
+# Start app
 if __name__ == '__main__':
     app.run_server(debug=True)
