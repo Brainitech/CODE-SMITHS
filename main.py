@@ -8,7 +8,8 @@ import plotly.express as px
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    html.Div([
+  html.Div([
+  html.Div([
         html.H1("Stock Price Visualization"),
     ]),
     html.Div([    
@@ -26,6 +27,9 @@ app.layout = html.Div([
         ),
         html.Button('PLOT GRAPH', id='plot-button', n_clicks=0),
     ]),
+  ],className='inputpart')
+   //item 2
+    html.Div([
     html.Div([
         html.Div([
             html.Img(id='company-logo',src=''),
@@ -37,7 +41,8 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id='stock-plot')
     ]),
-])
+  ],className='visualpart')
+],className='boxcontainer')
 
 def get_company_info(selected_stock):
     company_info = yf.Ticker(selected_stock)
