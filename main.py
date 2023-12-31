@@ -8,41 +8,45 @@ import plotly.express as px
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-  html.Div([
-  html.Div([
-        html.H1("Stock Price Visualization"),
-    ]),
-    html.Div([    
-        html.Label("Enter Stock Code:"),
-        dcc.Input(id='stock-input', type='text', value='MSFT'),
-        html.Button('Search', id='search-button', n_clicks=0,className='search-button'),
-    ]),
-    html.Div([
-        html.Label("Select Date Range:"),
-        dcc.DatePickerRange(
-            id='date-picker',
-            start_date=dt.date(2023, 1, 1),
-            end_date=dt.date.today(),
-            display_format='YYYY-MM-DD'
-        ),
-        html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
-    ]),
-  ],className='inputpart')
-   //item 2
-    html.Div([
     html.Div([
         html.Div([
-            html.Img(id='company-logo',src=''),
-            html.H1(id='name')
-        ], className='header'),
-        html.Div(
-            id="description", className='descrription_ticker'),
-    ]),
+            html.H1("Stock Price Visualization"),
+            ]),
+            html.Div([    
+              html.Label("Enter Stock Code:"),
+              dcc.Input(id='stock-input', type='text', value='MSFT'),
+              html.Button('Search', id='search-button', n_clicks=0,className='search-button')
+            ]),
+             html.Div([
+              html.Label("Select Date Range:"),
+              dcc.DatePickerRange(
+                  id='date-picker',
+                  start_date=dt.date(2023, 1, 1),
+                  end_date=dt.date.today(),
+                  display_format='YYYY-MM-DD'
+              ),
+              html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
+            ]),
+    ],className='inputpart'),
+   #item 2
     html.Div([
-        dcc.Graph(id='stock-plot')
-    ]),
-  style={'background-image':'url(https://upload.wikimedia.org/wikipedia/commons/2/22/North_Star_-_invitation_background.png)'}],className='visualpart')
-],className='boxcontainer')
+        html.Div([
+            html.Div([
+                html.Img(id='company-logo',src=''),
+                html.H1(id='name')
+            ],className='header'),
+            html.Div(
+                id="description", className='descrription_ticker'),
+        ]),
+        html.Div([
+            dcc.Graph(id='stock-plot')
+        ]),
+        ],className='visualpart'),
+    html.Link(
+        rel='stylesheet',
+        href='/assests/styles.css'
+    ),  
+    ],className='boxcontainer')
 
 def get_company_info(selected_stock):
     company_info = yf.Ticker(selected_stock)
