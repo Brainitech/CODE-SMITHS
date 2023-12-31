@@ -15,7 +15,7 @@ app.layout = html.Div([
     html.Div([    
         html.Label("Enter Stock Code:"),
         dcc.Input(id='stock-input', type='text', value='MSFT'),
-        html.Button('Search', id='search-button', n_clicks=0),
+        html.Button('Search', id='search-button', n_clicks=0,className='search-button'),
     ]),
     html.Div([
         html.Label("Select Date Range:"),
@@ -25,7 +25,7 @@ app.layout = html.Div([
             end_date=dt.date.today(),
             display_format='YYYY-MM-DD'
         ),
-        html.Button('PLOT GRAPH', id='plot-button', n_clicks=0),
+        html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
     ]),
   ],className='inputpart')
    //item 2
