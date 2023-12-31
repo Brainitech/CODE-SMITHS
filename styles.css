@@ -1,0 +1,52 @@
+*{
+  font-family:"Roboto",sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:0;
+}
+.search-button{
+  background-color:green;
+  color:white;
+  border:none;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:16px;
+  padding-right:16px;
+  border-radius:2px;
+  cursor:pointer;
+  margin-right:8px;
+  transition:opacity 0.15s;
+}
+.search-button:hover{
+  opacity:0.8;
+}
+.plotgraph-button{
+  background-color:green;
+  color:white;
+  border:none;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:16px;
+  padding-right:16px;
+  border-radius:2px;
+  cursor:pointer;
+  margin-right:8px;
+  transition:opacity 0.15s;
+}
+.plotgraph-button:hover{
+  opacity:0.8;
+}
+.boxcontainer{
+  display:flex;
+}
+.inputpart{
+  width:30 vw;
+align-items: center;
+flex-direction: column;
+justify-content: flex-start;
+background-color: rgb(5, 107, 107);
+}
+.displaypart
+{
+  flex:1;
+}
