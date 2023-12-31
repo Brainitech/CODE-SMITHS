@@ -41,8 +41,8 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id='stock-plot')
     ]),
-  ],className='visualpart')
-style={'background-image':'url(https://upload.wikimedia.org/wikipedia/commons/2/22/North_Star_-_invitation_background.png)'}],className='boxcontainer')
+  style={'background-image':'url(https://upload.wikimedia.org/wikipedia/commons/2/22/North_Star_-_invitation_background.png)'}],className='visualpart')
+],className='boxcontainer')
 
 def get_company_info(selected_stock):
     company_info = yf.Ticker(selected_stock)
