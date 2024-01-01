@@ -3,9 +3,11 @@ IEEE MEGA PROJECT 2023
 
 
 PROJECT TITLE :
+
 	Visual stocks
 
 PROJECT DESCRIPTION:
+
 A machine learning framework that can predict and visualise stock investments based on a stock code of a specific company.
 This model uses the DASH library  of python to provide the current stock details provided by Y finance python library 
 Include Domain specific as well as Domain Independent points.
