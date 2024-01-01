@@ -8,25 +8,25 @@ import plotly.express as px
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
+    html.Div([html.H1("Stock Price Visualization"),
+        ],className='heading'),
     html.Div([
+    html.Div([
+        html.Div([    
+          html.Label("Enter Stock Code:"),
+          dcc.Input(id='stock-input', type='text', value='MSFT'),
+          html.Button('Search', id='search-button', n_clicks=0,className='search-button')
+        ],className='search_stock'),
         html.Div([
-            html.H1("Stock Price Visualization"),
-            ]),
-            html.Div([    
-              html.Label("Enter Stock Code:"),
-              dcc.Input(id='stock-input', type='text', value='MSFT'),
-              html.Button('Search', id='search-button', n_clicks=0,className='search-button')
-            ]),
-             html.Div([
-              html.Label("Select Date Range:"),
-              dcc.DatePickerRange(
-                  id='date-picker',
-                  start_date=dt.date(2023, 1, 1),
-                  end_date=dt.date.today(),
-                  display_format='YYYY-MM-DD'
-              ),
-              html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
-            ]),
+          html.Label("Select Date Range:"),
+          dcc.DatePickerRange(
+              id='date-picker',
+              start_date=dt.date(2023, 1, 1),
+              end_date=dt.date.today(),
+              display_format='YYYY-MM-DD'
+          ),
+            html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
+        ],className='datepicker'),
     ],className='inputpart'),
    #item 2
     html.Div([
@@ -36,7 +36,7 @@ app.layout = html.Div([
                 html.H1(id='name')
             ],className='header'),
             html.Div(
-                id="description", className='descrription_ticker'),
+                id="description", className='description_ticker'),
         ]),
         html.Div([
             dcc.Graph(id='stock-plot')
@@ -47,6 +47,7 @@ app.layout = html.Div([
         href='/assests/styles.css'
     ),  
     ],className='boxcontainer')
+])
 
 def get_company_info(selected_stock):
     company_info = yf.Ticker(selected_stock)
