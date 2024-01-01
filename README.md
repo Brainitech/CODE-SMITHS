@@ -15,7 +15,7 @@ From the components mentioned above, break them into a set of milestones to achi
 
 Week 1:
 	Backend without the Machine Learning module.
-	Able to retrieve Stock Data and Plot an interactive graph on current and past values.
+	Able to retrieve Stock Data and Plot an interactive graph on current and past values./n
 Week 2:
 	UI created
 Week 3:
