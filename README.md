@@ -4,7 +4,7 @@ IEEE MEGA PROJECT 2023
 
 PROJECT TITLE :
 
-	#Visual stocks
+**Visual stocks**
 
 PROJECT DESCRIPTION:
 
