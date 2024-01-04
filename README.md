@@ -29,8 +29,7 @@ Week 2:
 
 Week 3:
 
-	Components D,E,F
- 
+	Script for base model has been written and is being tested locally.
 Week 4:
 
 	Component G and final touch ups.
