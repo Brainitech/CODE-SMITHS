@@ -55,11 +55,15 @@ app.layout = html.Div([
 ])
 
 def get_company_info(selected_stock):
-    company_info = yf.Ticker(selected_stock)
-    company_logo_url = company_info.info.get('logo_url', '')
-    company_name = company_info.info.get('longName', '')
-    company_description = company_info.info.get('longBusinessSummary', '')
-    return company_logo_url, company_name, company_description
+    try:
+        company_info = yf.Ticker(selected_stock)
+        company_logo_url = company_info.info.get('logo_url', '')
+        company_name = company_info.info.get('longName', '')
+        company_description = company_info.info.get('longBusinessSummary', '')
+        return company_logo_url, company_name, company_description
+    except:
+        company_description = "Enter valid stock code. Refer https://www.advfn.com/nasdaq/nasdaq.asp    "
+        return '', '', company_description
 
 @app.callback(
     [Output('company-logo', 'src'),
