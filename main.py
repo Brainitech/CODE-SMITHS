@@ -1,9 +1,12 @@
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
 import yfinance as yf
 import datetime as dt
 import plotly.express as px
+from model import get_stock_data, forecast_stock_prices
+
 
 app = dash.Dash(__name__)
 
@@ -27,6 +30,11 @@ app.layout = html.Div([
           ),
             html.Button('PLOT GRAPH', id='plot-button', n_clicks=0,className='plotgraph-button'),
         ],className='datepicker'),
+        html.Div([
+            html.Label("Number of days to predict"),
+            dcc.Input(id='forecast-input',type='number',value='10'),
+            html.Button('Forecast',id='forecast-button', n_clicks=0,className='forecast-button')
+        ],className='forecast'),
     ],className='inputpart'),
    #item 2
     html.Div([
@@ -39,13 +47,10 @@ app.layout = html.Div([
                 id="description", className='description_ticker'),
         ]),
         html.Div([
-            dcc.Graph(id='stock-plot')
+            dcc.Graph(id='stock-plot'),
+            dcc.Graph(id='forecast-output')
         ]),
-        ],className='visualpart'),
-    html.Link(
-        rel='stylesheet',
-        href='/assests/styles.css'
-    ),  
+        ],className='visualpart')
     ],className='boxcontainer')
 ])
 
@@ -93,6 +98,21 @@ def update_plot(n_clicks, selected_stock, start_date, end_date):
                           labels={'x': 'Date', 'y': 'Closing Price'},
                           title=f'{selected_stock} Stock Price Over Time')
             return fig
+    # If the button has not been clicked or an error occurred, return an empty graph
+    return px.line()
+
+@app.callback(
+    Output('forecast-output', 'figure'),
+    [Input('forecast-button', 'n_clicks')],
+    [State('stock-input', 'value'),
+     State('date-picker', 'end_date'),
+     State('forecast-input', 'value')]
+)
+def update_forecast(n_clicks, selected_stock, end_date, forecast_days):
+    if n_clicks > 0:
+        stock_data = get_stock_data(selected_stock, start_date=dt.date(2023, 1, 1), end_date=end_date)
+        fig = forecast_stock_prices(stock_data, int(forecast_days))
+        return fig
     # If the button has not been clicked or an error occurred, return an empty graph
     return px.line()
 

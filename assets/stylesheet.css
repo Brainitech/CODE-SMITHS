@@ -14,7 +14,8 @@
     padding: 20px;
   }
   .search-button,
-  .plotgraph-button{
+  .plotgraph-button,
+  .forecast-button{
     background-color:green;
     color:white;
     border:none;
@@ -23,15 +24,16 @@
     cursor:pointer;
     margin-right:8px;
     transition:opacity 0.15s;
+  
   }
-  .search-button:hover{
-    opacity:0.8;
-  }
-  .plotgraph-button:hover{
+  .search-button:hover,
+  .plotgraph-button:hover,
+  .forecast-button:hover{
     opacity:0.8;
   }
   .search_stock,
-  .datepicker{
+  .datepicker,
+  .forecast{
     padding-top: 50px;
     padding-bottom: 30px;
   }
