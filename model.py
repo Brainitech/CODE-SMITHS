@@ -1,4 +1,5 @@
 # model.py
+#importing libs
 import yfinance as yf
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -6,6 +7,7 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 import plotly.graph_objects as plt
 
+#Function to download stock prices
 def get_stock_data(ticker, start_date, end_date):
     try:
         stock_data = yf.download(ticker, start=start_date, end=end_date)
@@ -13,7 +15,7 @@ def get_stock_data(ticker, start_date, end_date):
     except Exception as e:
         print(f"Error fetching stock data: {e}")
         return None
-
+#Function to train and plot the graph
 def forecast_stock_prices(stock_data, forecast_days):
     if stock_data is None or len(stock_data) == 0:
         return None

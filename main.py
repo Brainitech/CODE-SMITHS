@@ -1,3 +1,5 @@
+#main.py
+#importing libraries
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
@@ -7,9 +9,10 @@ import datetime as dt
 import plotly.express as px
 from model import get_stock_data, forecast_stock_prices
 
-
+#start app
 app = dash.Dash(__name__)
 
+#App layout using dash html
 app.layout = html.Div([
     html.Div([html.H1("Stock Price Visualization"),
         ],className='heading'),
@@ -54,6 +57,7 @@ app.layout = html.Div([
     ],className='boxcontainer')
 ])
 
+#Function to fetch company info based on stock code
 def get_company_info(selected_stock):
     try:
         company_info = yf.Ticker(selected_stock)
@@ -72,6 +76,8 @@ def get_company_info(selected_stock):
     [Input('search-button', 'n_clicks')],
     [State('stock-input', 'value')]
 )
+
+#Function to update empty html divisions with fetched company info
 def update_company_info(n_clicks, selected_stock):
     if n_clicks > 0:
         company_logo_url, company_name, company_description = get_company_info(selected_stock)
@@ -79,6 +85,7 @@ def update_company_info(n_clicks, selected_stock):
     # If the button has not been clicked, return default values
     return '', '', ''
 
+#Function to fetch stock prices from yfinance
 def get_stock_data(ticker, start_date, end_date):
     try:
         stock_data = yf.download(ticker, start=start_date, end=end_date)
@@ -94,6 +101,8 @@ def get_stock_data(ticker, start_date, end_date):
      State('date-picker', 'start_date'),
      State('date-picker', 'end_date')]
 )
+
+#Function to plot a graph using fetched stock data
 def update_plot(n_clicks, selected_stock, start_date, end_date):
     if n_clicks > 0:
         stock_data = get_stock_data(selected_stock, start_date, end_date)
@@ -112,6 +121,8 @@ def update_plot(n_clicks, selected_stock, start_date, end_date):
      State('date-picker', 'end_date'),
      State('forecast-input', 'value')]
 )
+
+#Function to plot a forecasted values onto the graph
 def update_forecast(n_clicks, selected_stock, end_date, forecast_days):
     if n_clicks > 0:
         stock_data = get_stock_data(selected_stock, start_date=dt.date(2023, 1, 1), end_date=end_date)
@@ -120,5 +131,6 @@ def update_forecast(n_clicks, selected_stock, end_date, forecast_days):
     # If the button has not been clicked or an error occurred, return an empty graph
     return px.line()
 
+#Run the app
 if __name__ == '__main__':
     app.run_server(debug=True)
