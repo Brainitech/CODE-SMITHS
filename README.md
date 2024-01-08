@@ -31,5 +31,3 @@ Week 3:
 Week 4:
 
 	ML model has been uploaded and final touches are being made.
-
-###Setup
