@@ -65,9 +65,10 @@ def get_company_info(selected_stock):
         company_name = company_info.info.get('longName', '')
         company_description = company_info.info.get('longBusinessSummary', '')
         return company_logo_url, company_name, company_description
-    except:
+    except Exception as e:
         company_description = "Enter valid stock code. Refer https://www.advfn.com/nasdaq/nasdaq.asp    "
         return '', '', company_description
+
 
 @app.callback(
     [Output('company-logo', 'src'),
@@ -81,6 +82,7 @@ def get_company_info(selected_stock):
 def update_company_info(n_clicks, selected_stock):
     if n_clicks > 0:
         company_logo_url, company_name, company_description = get_company_info(selected_stock)
+        print(f"Company Logo URL: {company_name}")
         return company_logo_url, company_name, company_description
     # If the button has not been clicked, return default values
     return '', '', ''

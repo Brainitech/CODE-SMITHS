@@ -1,21 +1,18 @@
 # CODE-SMITHS
-IEEE MEGA PROJECT 2023
+##IEEE MEGA PROJECT 2023
 
 
-PROJECT TITLE :
+###PROJECT TITLE :
 
 **Visual stocks**
 
-PROJECT DESCRIPTION:
-
+###PROJECT DESCRIPTION:
 A machine learning framework that can predict and visualise stock investments based on a stock code of a specific company.
-This model uses the DASH library  of python to provide the current stock details provided by Y finance python library 
-Include Domain specific as well as Domain Independent points.
+This model uses the DASH library  of python to provide the current stock details provided by yfinance python library.
 
 
-PROJECT TIMELINE:
 
-From the components mentioned above, break them into a set of milestones to achieve in the course of a 4-week period.
+###PROJECT TIMELINE:
 
 Week 1:
 
@@ -30,6 +27,9 @@ Week 2:
 Week 3:
 
 	Script for base model has been written and is being tested locally.
+
 Week 4:
 
-	Component G and final touch ups.
+	ML model has been uploaded and final touches are being made.
+
+###Setup
