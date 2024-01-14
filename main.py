@@ -1,5 +1,5 @@
 #main.py
-#importing libraries
+#importing libs
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State

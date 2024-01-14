@@ -47,6 +47,7 @@
     width:30 vw;
     color: white;
     padding: 20px;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     justify-content: top;
